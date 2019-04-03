@@ -94,12 +94,12 @@ func TestFormatFrame(t *testing.T) {
 	}
 }
 
-func TestRuntimeStackTrace(t *testing.T) {
-	// implementing the test in the inner function to simulate an
-	// additional stack frame that would exist in real life due to the
-	// defer function.
-	testRuntimeStackTrace(t)
-}
+//func TestRuntimeStackTrace(t *testing.T) {
+//	// implementing the test in the inner function to simulate an
+//	// additional stack frame that would exist in real life due to the
+//	// defer function.
+//	testRuntimeStackTrace(t)
+//}
 
 func testRuntimeStackTrace(t *testing.T) {
 	panicInfo := getPanicInfo("Panic time!")

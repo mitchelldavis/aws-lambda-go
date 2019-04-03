@@ -35,7 +35,7 @@ func (h testWrapperHandler) Invoke(ctx context.Context, payload []byte) ([]byte,
 var _ Handler = (testWrapperHandler)(nil)
 
 func TestInvoke(t *testing.T) {
-	srv := &Function{handler: testWrapperHandler(
+	srv := &Function{Handler: testWrapperHandler(
 		func(ctx context.Context, input []byte) (interface{}, error) {
 			if deadline, ok := ctx.Deadline(); ok {
 				return deadline.UnixNano(), nil
@@ -62,7 +62,7 @@ func (e CustomError) Error() string { return fmt.Sprintf("Something bad happened
 
 func TestCustomError(t *testing.T) {
 
-	srv := &Function{handler: testWrapperHandler(
+	srv := &Function{Handler: testWrapperHandler(
 		func(ctx context.Context, input []byte) (interface{}, error) {
 			return nil, CustomError{}
 		},
@@ -81,7 +81,7 @@ func (e *CustomError2) Error() string { return fmt.Sprintf("Something bad happen
 
 func TestCustomErrorRef(t *testing.T) {
 
-	srv := &Function{handler: testWrapperHandler(
+	srv := &Function{Handler: testWrapperHandler(
 		func(ctx context.Context, input []byte) (interface{}, error) {
 			return nil, &CustomError2{}
 		},
@@ -95,7 +95,7 @@ func TestCustomErrorRef(t *testing.T) {
 }
 
 func TestContextPlumbing(t *testing.T) {
-	srv := &Function{handler: testWrapperHandler(
+	srv := &Function{Handler: testWrapperHandler(
 		func(ctx context.Context, input []byte) (interface{}, error) {
 			lc, _ := lambdacontext.FromContext(ctx)
 			return lc, nil
